@@ -4367,12 +4367,12 @@ bool16 TryChangeDeoxysForm(void)
     else
     {
          gSpecialVar_Result = FALSE;
-         return false;
+         return FALSE;
     }
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, &targetSpecies);
     CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
     gSpecialVar_Result = TRUE;
-    return true;
+    return TRUE;
 }
 
 void CheckSpecies(void)
