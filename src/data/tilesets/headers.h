@@ -650,6 +650,17 @@ const struct Tileset gTileset_EliteFour =
     .callback = InitTilesetAnim_EliteFour,
 };
 
+const struct Tileset gTileset_EliteFour_Steven =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_EliteFour,
+    .palettes = gTilesetPalettes_EliteFour_Steven,
+    .metatiles = gMetatiles_EliteFour,
+    .metatileAttributes = gMetatileAttributes_EliteFour,
+    .callback = InitTilesetAnim_EliteFour,
+};
+
 const struct Tileset gTileset_BattleFrontier =
 {
     .isCompressed = TRUE,
