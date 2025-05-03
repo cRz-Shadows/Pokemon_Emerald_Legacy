@@ -2912,6 +2912,9 @@ extern const u8 gJPText_WriteErrorUnableToSaveData[];
 // Berry Powder Menu
 extern const u8 gText_Powder[];
 
+// Soot Sack Menu
+extern const u8 gText_AshQty[];
+
 // Union Room Chat
 extern const u8 gText_F700JoinedChat[];
 extern const u8 gText_F700LeftChat[];
