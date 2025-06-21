@@ -2690,6 +2690,18 @@ enum ItemSortType
 	ITEM_TYPE_SHARD,
 	ITEM_TYPE_FOSSIL,
 	ITEM_TYPE_MAIL,
+    ITEM_TYPE_POKE_BALL,
+    ITEM_TYPE_PREMIER_BALL,
+    ITEM_TYPE_GREAT_BALL,
+    ITEM_TYPE_ULTRA_BALL,
+    ITEM_TYPE_MASTER_BALL,
+    ITEM_TYPE_LUXURY_BALL,
+    ITEM_TYPE_SAFARI_BALL,
+    ITEM_TYPE_NET_BALL,
+    ITEM_TYPE_DIVE_BALL,
+    ITEM_TYPE_NEST_BALL,
+    ITEM_TYPE_REPEAT_BALL,
+    ITEM_TYPE_TIMER_BALL,
 };
 static const u8 sText_SortItemsHow[] = _("Sort items how?");
 static const u8 sText_Name[] = _("name");
@@ -2717,7 +2729,7 @@ static const u8 sBagMenuSortKeyItems[] =
     ACTION_CANCEL,
 };
 
-static const u8 sBagMenuSortPokeBallsBerries[] =
+static const u8 sBagMenuSortBerries[] =
 {
     ACTION_BY_NAME,
     ACTION_BY_AMOUNT,
@@ -2882,6 +2894,19 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_DREAM_MAIL] = ITEM_TYPE_MAIL,
     [ITEM_FAB_MAIL] = ITEM_TYPE_MAIL,
     [ITEM_RETRO_MAIL] = ITEM_TYPE_MAIL,
+    
+    [ITEM_POKE_BALL] = ITEM_TYPE_POKE_BALL,
+    [ITEM_PREMIER_BALL] = ITEM_TYPE_PREMIER_BALL,
+    [ITEM_GREAT_BALL] = ITEM_TYPE_GREAT_BALL,
+    [ITEM_ULTRA_BALL] = ITEM_TYPE_ULTRA_BALL,
+    [ITEM_MASTER_BALL] = ITEM_TYPE_MASTER_BALL,
+    [ITEM_LUXURY_BALL] = ITEM_TYPE_LUXURY_BALL,
+    [ITEM_NET_BALL] = ITEM_TYPE_NET_BALL,
+    [ITEM_DIVE_BALL] = ITEM_TYPE_DIVE_BALL,
+    [ITEM_NEST_BALL] = ITEM_TYPE_NEST_BALL,
+    [ITEM_REPEAT_BALL] = ITEM_TYPE_REPEAT_BALL,
+    [ITEM_TIMER_BALL] = ITEM_TYPE_TIMER_BALL,
+    [ITEM_SAFARI_BALL] = ITEM_TYPE_SAFARI_BALL,
     
     #ifdef ITEM_EXPANSION
         [ITEM_HONEY] = ITEM_TYPE_STATUS_RECOVERY,
@@ -3177,13 +3202,13 @@ static void AddBagSortSubMenu(void)
             memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortKeyItems, NELEMS(sBagMenuSortKeyItems));
             gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortKeyItems);
             break;
-        case POCKET_POKE_BALLS:
         case POCKET_BERRIES:
         case POCKET_TM_HM:
-            gBagMenu->contextMenuItemsPtr = sBagMenuSortPokeBallsBerries;
-            memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortPokeBallsBerries, NELEMS(sBagMenuSortPokeBallsBerries));
-            gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortPokeBallsBerries);
+            gBagMenu->contextMenuItemsPtr = sBagMenuSortBerries;
+            memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortBerries, NELEMS(sBagMenuSortBerries));
+            gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortBerries);
             break;
+        case POCKET_POKE_BALLS:
         default:
             gBagMenu->contextMenuItemsPtr = sBagMenuSortItems;
             memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortItems, NELEMS(sBagMenuSortItems));
