@@ -46,6 +46,13 @@ static void FaintFromFieldPoison(u8 partyIdx)
 
     AdjustFriendship(pokemon, FRIENDSHIP_EVENT_FAINT_FIELD_PSN);
     SetMonData(pokemon, MON_DATA_STATUS, &status);
+    
+    if (FlagGet(FLAG_NUZLOCKE) && FlagGet(FLAG_SYS_POKEDEX_GET))
+    {
+        bool8 dead = TRUE;
+        SetMonData(pokemon, MON_DATA_DEAD, &dead);
+    }
+
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
     StringGet_Nickname(gStringVar1);
 }
