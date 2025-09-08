@@ -2904,31 +2904,46 @@ void SetMoveEffect(bool8 primary, u8 certain)
 
 static void Cmd_seteffectwithchance(void)
 {
+    int i;
     u32 percentChance;
+    u8 effectCount = 1;
+    // Set a specific array for Burn Flinch Effect
+    // however a generic array with lookup based on
+    // Effect definition would be more scalable
+    u8 moveEffectsBurnFlinch[2] = {MOVE_EFFECT_BURN, MOVE_EFFECT_FLINCH};
 
     if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
-    if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
-        && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    for (i = 0; i < effectCount; i++)
     {
-        gBattleCommunication[MOVE_EFFECT_BYTE] &= ~MOVE_EFFECT_CERTAIN;
-        SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
-    }
-    else if (Random() % 100 < percentChance
-             && gBattleCommunication[MOVE_EFFECT_BYTE]
-             && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
-    {
-        if (percentChance >= 100)
+        if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN_FLINCH)
+        {
+            gBattleCommunication[MOVE_EFFECT_BYTE] = moveEffectsBurnFlinch[i];
+            effectCount = 2;
+        }
+        
+        if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
+            && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        {
+            gBattleCommunication[MOVE_EFFECT_BYTE] &= ~MOVE_EFFECT_CERTAIN;
             SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
-        else
-            SetMoveEffect(FALSE, 0);
-    }
-    else
-    {
-        gBattlescriptCurrInstr++;
+        }
+        else if (Random() % 100 < percentChance
+                && gBattleCommunication[MOVE_EFFECT_BYTE]
+                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        {
+            if (percentChance >= 100)
+                SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
+            else
+                SetMoveEffect(FALSE, 0);
+        }
+        else if (i == (effectCount - 1)) // Increment Instruction on last effect
+        {
+            gBattlescriptCurrInstr++;
+        }
     }
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;

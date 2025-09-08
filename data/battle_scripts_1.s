@@ -218,7 +218,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSecretPower            @ EFFECT_SECRET_POWER
 	.4byte BattleScript_EffectDoubleEdge             @ EFFECT_DOUBLE_EDGE
 	.4byte BattleScript_EffectTeeterDance            @ EFFECT_TEETER_DANCE
-	.4byte BattleScript_EffectBurnHit                @ EFFECT_BLAZE_KICK
+	.4byte BattleScript_EffectBlazeKick              @ EFFECT_BLAZE_KICK
 	.4byte BattleScript_EffectMudSport               @ EFFECT_MUD_SPORT
 	.4byte BattleScript_EffectPoisonFang             @ EFFECT_POISON_FANG
 	.4byte BattleScript_EffectWeatherBall            @ EFFECT_WEATHER_BALL
@@ -939,6 +939,10 @@ BattleScript_EffectLeafBlade2::
 	attackstring
 	ppreduce
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectBlazeKick::
+	setmoveeffect MOVE_EFFECT_BURN_FLINCH
+	goto BattleScript_EffectHit
 
 BattleScript_EffectRecoil::
 	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
