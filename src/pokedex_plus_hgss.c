@@ -6491,6 +6491,8 @@ static void HandleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u16 previousT
 
     if (base_i < iterations)
     {
+        if (targetSpecies == previousTargetSpecies)
+            return; //Prevents duplication of the icon sprite and prevents overflow for multiple methods for Eeveelutions (does leave a gap between Espeon and Umbreon)
         LoadMonIconPalette(targetSpecies); //Loads pallete for current mon
         #ifndef POKEMON_EXPANSION
             gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0, TRUE); //Create pokemon sprite
