@@ -5361,7 +5361,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     u8 numTutorMoves    = sPokedexView->numTutorMoves;
     u8 movesTotal       = sPokedexView->movesTotal;
     u8 selected         = sPokedexView->moveSelected;
-    u8 level;
+    u8 level = 0;
     u8 moves_x = 5;
     u8 moves_y = 3;
     u16 move;
@@ -5398,7 +5398,8 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     //Calculate and retrieve correct move from the arrays
     if (selected < numEggMoves)
     {
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_MoveEgg, moves_x + 113, moves_y + 3);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_Move, moves_x + 113, moves_y + 14);
         item = ITEM_LUCKY_EGG;
     }
     else if (selected < (numEggMoves + numLevelUpMoves))
@@ -5427,7 +5428,8 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     }
     else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves))
     {
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_Move, moves_x + 113, moves_y + 3);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_MoveTutor, moves_x + 113, moves_y + 14);
         item = ITEM_TEACHY_TV;
     }
     else
