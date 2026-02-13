@@ -6470,3 +6470,8 @@ void IsLastMonThatKnowsSurf(void)
             gSpecialVar_Result = TRUE;
     }
 }
+
+u16 GetTMHMMoves(u16 position)
+{
+    return sTMHMMoves[position];
+}

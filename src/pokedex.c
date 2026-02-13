@@ -19,6 +19,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokedex.h"
+#include "pokedex_plus_hgss.h"
 #include "pokedex_area_screen.h"
 #include "pokedex_cry_screen.h"
 #include "pokemon_icon.h"
@@ -1685,11 +1686,19 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
         pokedexView->unkArr3[i] = 0;
 }
 
+#define HGSS_DEX TRUE
+
 void CB2_OpenPokedex(void)
 {
     u8 *addr;
     u32 size;
 
+    if (HGSS_DEX)
+    {
+        CB2_OpenPokedexPlusHGSS();
+        return;
+    }
+    
     switch (gMain.state)
     {
     case 0:
@@ -6530,7 +6539,7 @@ static void PrintMonStatsToggle(u8 taskId)
     FillWindowPixelRect(0, PIXEL_FILL(0), base_x, base_y, 90, 100); //bottom stats
     FillWindowPixelRect(0, PIXEL_FILL(0), abilities_x, 99, 130, 58); //abilities
 
-
+    /* Commented out due to HGSS Upgrade removing many global strings used.
     //Base stats
     if (gTasks[taskId].data[5] == 0)
     {
@@ -6547,7 +6556,7 @@ static void PrintMonStatsToggle(u8 taskId)
         ConvertIntToDecimalStringN(strBase, gSpeciesInfo[species].baseAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_first_row, base_y + base_offset*base_i);
 
-        PrintInfoScreenTextSmall(gText_Stats_SpAtk, base_x+base_x_second_row, base_y + base_offset*base_i);
+        PrintInfoScreenTextSmall(gText_Stats_SpAttack, base_x+base_x_second_row, base_y + base_offset*base_i);
         ConvertIntToDecimalStringN(strBase, gSpeciesInfo[species].baseSpAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_offset, base_y + base_offset*base_i);
 
@@ -6556,7 +6565,7 @@ static void PrintMonStatsToggle(u8 taskId)
         ConvertIntToDecimalStringN(strBase, gSpeciesInfo[species].baseDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_first_row, base_y + base_offset*base_i);
 
-        PrintInfoScreenTextSmall(gText_Stats_SpDef, base_x+base_x_second_row, base_y + base_offset*base_i);
+        PrintInfoScreenTextSmall(gText_Stats_SpDefense, base_x+base_x_second_row, base_y + base_offset*base_i);
         ConvertIntToDecimalStringN(strBase, gSpeciesInfo[species].baseSpDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintInfoScreenTextSmall(strBase, base_x+base_x_offset, base_y + base_offset*base_i);
         base_i++;
@@ -6767,7 +6776,7 @@ static void PrintMonStatsToggle(u8 taskId)
         }
         PrintInfoScreenTextSmall(gStringVar1, base_x + 37, base_y + base_offset*base_i);
     }
-
+    */
 
 
     //Abilitie(s)

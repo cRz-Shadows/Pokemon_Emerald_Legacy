@@ -186,7 +186,7 @@ static const struct SpriteFrameImage sPicTable_Arrow[] =
     obj_frame_tiles(sArrowRight_Gfx)
 };
 
-static const struct SpritePalette sSpritePalette_Arrow =
+const struct SpritePalette sSpritePalette_Arrow =
 {
     sArrow_Pal, PALTAG_ARROW
 };
@@ -222,7 +222,7 @@ static const union AnimCmd *const sAnims_Arrow[] =
     [ARROW_RIGHT] = sAnim_Arrow_Right,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Arrow =
+const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
     .tileTag = TAG_NONE,
     .paletteTag = PALTAG_ARROW,

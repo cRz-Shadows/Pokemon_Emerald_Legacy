@@ -684,6 +684,7 @@ u8 GetEggMovesSpecies(u16 species, u16 *eggMoves)
 
     return numEggMoves;
 }
+
 bool8 SpeciesCanLearnEggMove(u16 species, u16 move) //Move search PokedexPlus HGSS_Ui
 {
     u16 eggMoveIdx;
