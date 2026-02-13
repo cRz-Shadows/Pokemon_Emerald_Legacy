@@ -1108,8 +1108,15 @@ BattleScript_EffectAccuracyDownHit::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectSkyAttack::
+	attackcanceler
 	ppreduce
-	goto BattleScript_TwoTurnMovesSecondTurn
+	setmoveeffect MOVE_EFFECT_CHARGING
+	setbyte sB_ANIM_TURN, 1
+	clearstatusfromeffect BS_ATTACKER
+	orword gHitMarker, HITMARKER_NO_PPDEDUCT
+	setmoveeffect MOVE_EFFECT_FLINCH
+	goto BattleScript_HitFromAccCheck
+	@goto BattleScript_TwoTurnMovesSecondTurn
 	@jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	@jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
 	@setbyte sTWOTURN_STRINGID, B_MSG_TURN1_SKY_ATTACK
