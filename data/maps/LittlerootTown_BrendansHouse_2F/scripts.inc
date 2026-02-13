@@ -254,7 +254,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC::
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC_GameCleared::
-	goto EventScript_PCMainMenu
+	goto EventScript_PCMainMenu_PlayerRoom
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC::

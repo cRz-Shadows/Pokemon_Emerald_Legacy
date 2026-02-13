@@ -51,6 +51,7 @@ EventScript_AccessLanettesPC::
 	return
 
 EventScript_TurnOffPC::
+	setvar VAR_0x8004, PC_LOCATION_OTHER
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
@@ -62,4 +63,53 @@ EventScript_AccessHallOfFame::
 	special AccessHallOfFamePC
 	waitstate
 	goto EventScript_AccessPC
+	end
+
+EventScript_PCMainMenu_PlayerRoom::
+	message gText_WhichPCShouldBeAccessed
+	waitmessage
+	special ScriptMenu_CreatePCMultichoice
+	waitstate
+	goto EventScript_AccessPC_PlayerRoom
+	end
+
+EventScript_AccessPC_PlayerRoom::
+	switch VAR_RESULT
+	case 0, EventScript_AccessPokemonStorage_PlayerRoom
+	case 1, EventScript_AccessPlayersPC_PlayerRoom
+	case 2, EventScript_AccessHallOfFame_PlayerRoom
+	case 3, EventScript_TurnOffPC_PlayerRoom
+	case MULTI_B_PRESSED, EventScript_TurnOffPC_PlayerRoom
+	end
+
+EventScript_AccessPlayersPC_PlayerRoom::
+	playse SE_PC_LOGIN
+	msgbox gText_AccessedPlayersPC, MSGBOX_DEFAULT
+	special PlayerPC
+	waitstate
+	goto EventScript_PCMainMenu_PlayerRoom
+	end
+
+EventScript_AccessPokemonStorage_PlayerRoom::
+	playse SE_PC_LOGIN
+	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_AccessSomeonesPC
+	call_if_set FLAG_SYS_PC_LANETTE, EventScript_AccessLanettesPC
+	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT
+	special ShowPokemonStorageSystemPC
+	waitstate
+	goto EventScript_PCMainMenu_PlayerRoom
+	end
+
+EventScript_TurnOffPC_PlayerRoom::
+	playse SE_PC_OFF
+	special DoPCTurnOffEffect
+	releaseall
+	end
+
+EventScript_AccessHallOfFame_PlayerRoom::
+	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_TurnOffPC_PlayerRoom
+	playse SE_PC_LOGIN
+	special AccessHallOfFamePC
+	waitstate
+	goto EventScript_AccessPC_PlayerRoom
 	end
