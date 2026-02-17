@@ -1108,13 +1108,10 @@ BattleScript_EffectAccuracyDownHit::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectSkyAttack::
-	ppreduce
-	goto BattleScript_TwoTurnMovesSecondTurn
-	@jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
-	@jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	@setbyte sTWOTURN_STRINGID, B_MSG_TURN1_SKY_ATTACK
-	@call BattleScriptFirstChargingTurn
-	@goto BattleScript_MoveEnd
+	@ Sky Attack was changed from a two-turn move to a one-turn move.
+	@ Use the standard hit path with flinch (secondaryEffectChance handles the 30% rate).
+	setmoveeffect MOVE_EFFECT_FLINCH
+	goto BattleScript_EffectHit
 
 BattleScript_EffectConfuseHit::
 	setmoveeffect MOVE_EFFECT_CONFUSION
