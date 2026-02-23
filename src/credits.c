@@ -59,7 +59,7 @@ enum {
 #define tPrintedPage       data[14]
 #define tTaskId_UpdatePage data[15]
 
-#define NUM_MON_SLIDES 71
+#define NUM_MON_SLIDES 107
 
 struct CreditsData
 {
