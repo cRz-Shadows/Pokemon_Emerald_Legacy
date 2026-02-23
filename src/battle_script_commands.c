@@ -2917,13 +2917,14 @@ static void Cmd_seteffectwithchance(void)
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
+
+    if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN_FLINCH)
+        effectCount = 2;
+
     for (i = 0; i < effectCount; i++)
     {
-        if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN_FLINCH)
-        {
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK)
             gBattleCommunication[MOVE_EFFECT_BYTE] = moveEffectsBurnFlinch[i];
-            effectCount = 2;
-        }
         
         if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
             && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
