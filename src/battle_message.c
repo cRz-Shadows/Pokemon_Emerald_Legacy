@@ -430,6 +430,7 @@ static const u8 sText_SpAtk2[] = _("SP. ATK");
 static const u8 sText_SpDef2[] = _("SP. DEF");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
+static const u8 sText_AttackBoostedByAbility[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nwas boosted by {B_ATK_ABILITY}!\p"); // // Added new Ability Effect to provide text for Overgrow, Blaze, Torrent and Swarm
 
 const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
 {
@@ -885,6 +886,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
     [STRINGID_PKMNBOXLANETTESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
     [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
+    [STRINGID_ATTACKBOOSTEDBYABILITY - BATTLESTRINGS_TABLE_START] = sText_AttackBoostedByAbility,
 };
 
 const u16 gMissStringIds[] =
