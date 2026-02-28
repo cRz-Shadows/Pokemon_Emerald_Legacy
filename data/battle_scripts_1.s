@@ -4640,3 +4640,7 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 BattleScript_AttackBoostedByAbility::
 	printstring STRINGID_ATTACKBOOSTEDBYABILITY
 	return
+
+BattleScript_MagmaArmorActivated::
+	printstring STRINGID_MAGMAARMORACTIVATED
+	return
