@@ -2,11 +2,26 @@ MossdeepCity_Mart_MapScripts::
 	.byte 0
 
 MossdeepCity_Mart_EventScript_Clerk::
+	call_if_unset FLAG_SYS_GAME_CLEAR, MossdeepCity_Mart_EventScript_Clerk_MainGame
+	call_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_Mart_EventScript_Clerk_PostGame
+	end
+
+MossdeepCity_Mart_EventScript_Clerk_MainGame::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
 	pokemart MossdeepCity_Mart_Pokemart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_Mart_EventScript_Clerk_PostGame::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart MossdeepCity_Mart_Pokemart_PostGame
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -21,6 +36,22 @@ MossdeepCity_Mart_Pokemart:
 	.2byte ITEM_REVIVE
 	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_ETHER
+	.2byte ITEM_NONE
+	release
+	end
+
+	.align 2
+MossdeepCity_Mart_Pokemart_PostGame:
+	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_NET_BALL
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_HYPER_POTION
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_REVIVE
+	.2byte ITEM_MAX_REPEL
+	.2byte ITEM_ETHER
+	.2byte ITEM_TWISTED_SPOON
+	.2byte ITEM_NEVER_MELT_ICE
 	.2byte ITEM_NONE
 	release
 	end

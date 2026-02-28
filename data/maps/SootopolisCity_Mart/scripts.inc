@@ -2,11 +2,26 @@ SootopolisCity_Mart_MapScripts::
 	.byte 0
 
 SootopolisCity_Mart_EventScript_Clerk::
+	call_if_unset FLAG_SYS_GAME_CLEAR, SootopolisCity_Mart_EventScript_Clerk_MainGame
+	call_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_Mart_EventScript_Clerk_PostGame
+	end
+
+SootopolisCity_Mart_EventScript_Clerk_MainGame::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
 	pokemart SootopolisCity_Mart_Pokemart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_Mart_EventScript_Clerk_PostGame::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart SootopolisCity_Mart_Pokemart_PostGame
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -23,6 +38,22 @@ SootopolisCity_Mart_Pokemart:
 	.2byte ITEM_TM_DIG
 	.2byte ITEM_TM_THIEF
 	.2byte ITEM_TM_BULLET_SEED
+	.2byte ITEM_NONE
+	release
+	end
+
+SootopolisCity_Mart_Pokemart_PostGame:
+	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_HYPER_POTION
+	.2byte ITEM_MAX_POTION
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_REVIVE
+	.2byte ITEM_MAX_REPEL
+	.2byte ITEM_TM_STEEL_WING
+	.2byte ITEM_TM_DIG
+	.2byte ITEM_TM_THIEF
+	.2byte ITEM_TM_BULLET_SEED
+	.2byte ITEM_MYSTIC_WATER
 	.2byte ITEM_NONE
 	release
 	end
