@@ -5282,15 +5282,8 @@ static bool8 CalculateMoves(void)
     #endif
 
     //Calculate amount of Egg and LevelUp moves
-    numEggMoves = GetEggMovesSpecies(species, statsMovesEgg);
+    numEggMoves = GetEggMovesSpecies(GetEggSpecies(species), statsMovesEgg);
     numLevelUpMoves = GetLevelUpMovesBySpecies(species, statsMovesLevelUp);
-
-    //Egg moves
-    for (i=0; i < numEggMoves; i++)
-    {
-        sStatsMoves[movesTotal] = statsMovesEgg[i];
-        movesTotal++;
-    }
 
     //Level up moves
     for (i=0; i < numLevelUpMoves; i++)
@@ -5322,6 +5315,14 @@ static bool8 CalculateMoves(void)
             movesTotal++;
         }
     }
+    
+    //Egg moves
+    for (i=0; i < numEggMoves; i++)
+    {
+        sStatsMoves[movesTotal] = statsMovesEgg[i];
+        movesTotal++;
+    }
+
     #else
     for (i = 0; gTeachableLearnsets[species][i] != MOVE_UNAVAILABLE; i++)
     {
@@ -5396,22 +5397,16 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     }
 
     //Calculate and retrieve correct move from the arrays
-    if (selected < numEggMoves)
-    {
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_MoveEgg, moves_x + 113, moves_y + 3);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_Move, moves_x + 113, moves_y + 14);
-        item = ITEM_LUCKY_EGG;
-    }
-    else if (selected < (numEggMoves + numLevelUpMoves))
+    if (selected < numLevelUpMoves)
     {
         #if defined (BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
             level = gLevelUpLearnsets[species][(selected-numEggMoves)].level;
         #else
             //Calculate level of the move
-            while (((gLevelUpLearnsets[species][(selected-numEggMoves)] & LEVEL_UP_MOVE_LV) != (level << 9)) && level < 0xFF)
+            while (((gLevelUpLearnsets[species][(selected)] & LEVEL_UP_MOVE_LV) != (level << 9)) && level < 0xFF)
             {
                 level++;
-                if (gLevelUpLearnsets[species][(selected-numEggMoves)] == LEVEL_UP_END)
+                if (gLevelUpLearnsets[species][(selected)] == LEVEL_UP_END)
                     level = 0xFF;
             }
         #endif
@@ -5420,19 +5415,25 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 14); //Print level
         item = ITEM_EXP_SHARE;
     }
-    else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves))
+    else if (selected < (numLevelUpMoves + numTMHMMoves))
     {
-        CopyItemName(sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)], gStringVar1); //TM name
+        CopyItemName(sStatsMovesTMHM_ID[(selected-numLevelUpMoves)], gStringVar1); //TM name
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 9);
-        item = sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)];
+        item = sStatsMovesTMHM_ID[(selected-numLevelUpMoves)];
     }
-    else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves))
+    else if (selected < (numLevelUpMoves + numTMHMMoves + numTutorMoves))
     {
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_Move, moves_x + 113, moves_y + 3);
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_MoveTutor, moves_x + 113, moves_y + 14);
         item = ITEM_TEACHY_TV;
     }
-    else
+    else if (selected < (numLevelUpMoves + numTMHMMoves + numTutorMoves + numEggMoves))
+    {
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_MoveEgg, moves_x + 113, moves_y + 3);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_Stats_Move, moves_x + 113, moves_y + 14);
+        item = ITEM_LUCKY_EGG;
+    }
+    else 
     {
         StringCopy(gStringVar4, gText_CommunicationError);
         item = ITEM_MASTER_BALL;
