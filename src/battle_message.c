@@ -430,8 +430,8 @@ static const u8 sText_SpAtk2[] = _("SP. ATK");
 static const u8 sText_SpDef2[] = _("SP. DEF");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
-static const u8 sText_AttackBoostedByAbility[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nwas boosted by {B_ATK_ABILITY}!\p"); // // Added new Ability Effect to provide text for Overgrow, Blaze, Torrent and Swarm
-static const u8 sText_MagmaArmorActivated[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY} reduced\nthe damage from {B_CURRENT_MOVE}!\p"); // Added new Battle result message to provide text for Magma Armor activation
+static const u8 sText_AttackBoostedByAbility[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nwas boosted by {B_ATK_ABILITY}!"); // Added new Ability Effect to provide text for Overgrow, Blaze, Torrent and Swarm
+static const u8 sText_MagmaArmorActivated[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY} reduced\nthe damage from {B_CURRENT_MOVE}!"); // Added new Battle result message to provide text for Magma Armor activation
 
 const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
 {
