@@ -27,11 +27,26 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Nurse::
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_Clerk::
+	call_if_unset FLAG_SYS_GAME_CLEAR, EverGrandeCity_PokemonLeague_1F_EventScript_Clerk_MainGame
+	call_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PokemonLeague_1F_EventScript_Clerk_PostGame
+	end
+
+EverGrandeCity_PokemonLeague_1F_EventScript_Clerk_MainGame::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
 	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_PokemonLeague_1F_EventScript_Clerk_PostGame::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart_PostGame
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -54,6 +69,30 @@ EverGrandeCity_PokemonLeague_1F_Pokemart:
 	.2byte ITEM_TM_HAIL
 	.2byte ITEM_TM_FRUSTRATION
 	.2byte ITEM_TM_RETURN
+	.2byte ITEM_NONE
+	release
+	end
+
+	.align 2
+EverGrandeCity_PokemonLeague_1F_Pokemart_PostGame:
+	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_HYPER_POTION
+	.2byte ITEM_MAX_POTION
+	.2byte ITEM_FULL_RESTORE
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_REVIVE
+	.2byte ITEM_MAX_REPEL
+	.2byte ITEM_TM_SHADOW_BALL
+	.2byte ITEM_TM_IRON_TAIL
+	.2byte ITEM_TM_SLUDGE_BOMB
+	.2byte ITEM_TM_SANDSTORM
+	.2byte ITEM_TM_RAIN_DANCE
+	.2byte ITEM_TM_SUNNY_DAY
+	.2byte ITEM_TM_HAIL
+	.2byte ITEM_TM_FRUSTRATION
+	.2byte ITEM_TM_RETURN
+	.2byte ITEM_BLACK_GLASSES
+	.2byte ITEM_SPELL_TAG
 	.2byte ITEM_NONE
 	release
 	end

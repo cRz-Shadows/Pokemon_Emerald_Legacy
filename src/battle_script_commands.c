@@ -2049,6 +2049,10 @@ static void Cmd_effectivenesssound(void)
 static void Cmd_resultmessage(void)
 {
     u32 stringId = 0;
+    u32 moveType;
+    u8 ability = gBattleMons[gBattlerAttacker].ability;
+
+    GET_MOVE_TYPE(gCurrentMove, moveType);
 
     if (gBattleControllerExecFlags)
         return;
@@ -2059,7 +2063,58 @@ static void Cmd_resultmessage(void)
         gBattleCommunication[MSG_DISPLAY] = 1;
     }
     else
-    {
+    {      
+        // Added check for Overgrow, Blaze, Torrent and Swarm to provide a message if activated     
+        if (gBattleMons[gBattlerAttacker].hp <= (gBattleMons[gBattlerAttacker].maxHP / 3) && !gBattleStruct->checkedMoveBoostedByAbility)
+        {
+            switch (ability)
+            {
+                case ABILITY_OVERGROW:
+                    if (moveType == TYPE_GRASS)
+                    {
+                        BattleScriptPushCursor();
+                        gBattleCommunication[MSG_DISPLAY] = 1;
+                        gBattlescriptCurrInstr = BattleScript_AttackBoostedByAbility;
+                    }
+                    break;
+                case ABILITY_BLAZE:
+                    if (moveType == TYPE_FIRE)
+                    {
+                        BattleScriptPushCursor();
+                        gBattleCommunication[MSG_DISPLAY] = 1;
+                        gBattlescriptCurrInstr = BattleScript_AttackBoostedByAbility;
+                    }
+                    break;
+                case ABILITY_TORRENT:
+                    if (moveType == TYPE_WATER)
+                    {
+                        BattleScriptPushCursor();
+                        gBattleCommunication[MSG_DISPLAY] = 1;
+                        gBattlescriptCurrInstr = BattleScript_AttackBoostedByAbility;
+                    }
+                    break;
+                case ABILITY_SWARM:
+                    if (moveType == TYPE_BUG)
+                    {
+                        BattleScriptPushCursor();
+                        gBattleCommunication[MSG_DISPLAY] = 1;
+                        gBattlescriptCurrInstr = BattleScript_AttackBoostedByAbility;
+                    }
+                    break;
+            }
+            gBattleStruct->checkedMoveBoostedByAbility = TRUE;
+            return;
+        }
+        
+        // Added check for Magma Armor to provide a message if activated
+        if (gBattleMons[gBattlerTarget].ability == ABILITY_MAGMA_ARMOR && moveType == TYPE_WATER && !gBattleStruct->checkedMagmaArmor)
+        {
+            BattleScriptPushCursor();
+            gBattleCommunication[MSG_DISPLAY] = 1;
+            gBattlescriptCurrInstr = BattleScript_MagmaArmorActivated;
+            gBattleStruct->checkedMagmaArmor = TRUE;
+            return;
+        }
         gBattleCommunication[MSG_DISPLAY] = 1;
         switch (gMoveResultFlags & (u8)(~MOVE_RESULT_MISSED))
         {
@@ -2237,7 +2292,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
     bool32 statusChanged = FALSE;
     u8 affectsUser = 0; // 0x40 otherwise
     bool32 noSunCanFreeze = TRUE;
-
+    
     if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_AFFECTS_USER)
     {
         gEffectBattler = gBattlerAttacker; // battlerId that effects get applied on
@@ -2904,31 +2959,47 @@ void SetMoveEffect(bool8 primary, u8 certain)
 
 static void Cmd_seteffectwithchance(void)
 {
+    int i;
     u32 percentChance;
+    u8 effectCount = 1;
+    // Set a specific array for Burn Flinch Effect
+    // however a generic array with lookup based on
+    // Effect definition would be more scalable
+    u8 moveEffectsBurnFlinch[2] = {MOVE_EFFECT_BURN, MOVE_EFFECT_FLINCH};
 
     if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
-    if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
-        && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+
+    if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN_FLINCH)
+        effectCount = 2;
+
+    for (i = 0; i < effectCount; i++)
     {
-        gBattleCommunication[MOVE_EFFECT_BYTE] &= ~MOVE_EFFECT_CERTAIN;
-        SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
-    }
-    else if (Random() % 100 < percentChance
-             && gBattleCommunication[MOVE_EFFECT_BYTE]
-             && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
-    {
-        if (percentChance >= 100)
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK)
+            gBattleCommunication[MOVE_EFFECT_BYTE] = moveEffectsBurnFlinch[i];
+        
+        if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
+            && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        {
+            gBattleCommunication[MOVE_EFFECT_BYTE] &= ~MOVE_EFFECT_CERTAIN;
             SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
-        else
-            SetMoveEffect(FALSE, 0);
-    }
-    else
-    {
-        gBattlescriptCurrInstr++;
+        }
+        else if (Random() % 100 < percentChance
+                && gBattleCommunication[MOVE_EFFECT_BYTE]
+                && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        {
+            if (percentChance >= 100)
+                SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
+            else
+                SetMoveEffect(FALSE, 0);
+        }
+        else if (i == (effectCount - 1)) // Increment Instruction on last effect
+        {
+            gBattlescriptCurrInstr++;
+        }
     }
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
@@ -4212,6 +4283,9 @@ static void Cmd_moveend(void)
     u16 *choicedMoveAtk = NULL;
     u8 endMode, endState;
     u16 originallyUsedMove;
+
+    gBattleStruct->checkedMoveBoostedByAbility = FALSE;
+    gBattleStruct->checkedMagmaArmor = FALSE;
 
     if (gChosenMove == MOVE_UNAVAILABLE)
         originallyUsedMove = MOVE_NONE;
@@ -10061,9 +10135,15 @@ static void Cmd_displaydexinfo(void)
         if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
+            #ifndef BATTLE_ENGINE
             gBattleCommunication[TASK_ID] = DisplayCaughtMonDexPage(SpeciesToNationalPokedexNum(species),
                                                                         gBattleMons[gBattlerTarget].otId,
                                                                         gBattleMons[gBattlerTarget].personality);
+            #else
+            gBattleCommunication[TASK_ID] = DisplayCaughtMonDexPage(SpeciesToNationalPokedexNum(species),
+                                                                        gBattleMons[GetCatchingBattler()].otId,
+                                                                        gBattleMons[GetCatchingBattler()].personality);
+            #endif
             gBattleCommunication[0]++;
         }
         break;

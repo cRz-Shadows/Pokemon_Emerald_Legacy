@@ -4410,6 +4410,16 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_EVER_GRANDE_CITY_CHAMPIONS_ROOM_STEVEN",
+      "name": "EverGrandeCity_ChampionsRoom_Steven_Layout",
+      "width": 13,
+      "height": 13,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_EliteFour_Steven",
+      "border_filepath": "data/layouts/EverGrandeCity_ChampionsRoom/border.bin",
+      "blockdata_filepath": "data/layouts/EverGrandeCity_ChampionsRoom/map.bin"
     }
   ]
 }

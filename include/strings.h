@@ -539,27 +539,23 @@ extern const u8 gText_NoMatchingPkmnWereFound[];
 extern const u8 gText_SelectorArrow[];
 
 //PokedexPlus HGSS_Ui
-extern const u8 gText_Stats_EV[];
-extern const u8 gText_Stats_EV_HP[];
-extern const u8 gText_Stats_EV_Attack[];
-extern const u8 gText_Stats_EV_Defense[];
-extern const u8 gText_Stats_EV_Speed[];
-extern const u8 gText_Stats_EV_SpAtk[];
-extern const u8 gText_Stats_EV_SpDef[];
+extern const u8 gText_Stats_Buttons[];
+extern const u8 gText_Stats_Buttons_Decapped[];
 extern const u8 gText_Stats_HP[];
 extern const u8 gText_Stats_Attack[];
 extern const u8 gText_Stats_Defense[];
 extern const u8 gText_Stats_Speed[];
-extern const u8 gText_Stats_SpAtk[];
-extern const u8 gText_Stats_SpDef[];
-extern const u8 gText_Stats_EVHP[];
-extern const u8 gText_Stats_EVAttack[];
-extern const u8 gText_Stats_EVDefense[];
-extern const u8 gText_Stats_EVSpeed[];
-extern const u8 gText_Stats_EVSpAtk[];
-extern const u8 gText_Stats_EVSpDef[];
+extern const u8 gText_Stats_SpAttack[];
+extern const u8 gText_Stats_SpDefense[];
+extern const u8 gText_Stats_EV_Plus1[];
+extern const u8 gText_Stats_EV_Plus2[];
+extern const u8 gText_Stats_EV_Plus3[];
+extern const u8 gText_Stats_EvStr1Str2[];
 extern const u8 gText_Stats_MoveSelectedMax[];
+extern const u8 gText_Stats_Move[];
+extern const u8 gText_Stats_MoveEgg[];
 extern const u8 gText_Stats_MoveLevel[];
+extern const u8 gText_Stats_MoveTutor[];
 extern const u8 gText_Stats_Gender_0[];
 extern const u8 gText_Stats_Gender_12_5[];
 extern const u8 gText_Stats_Gender_25[];
@@ -567,11 +563,27 @@ extern const u8 gText_Stats_Gender_50[];
 extern const u8 gText_Stats_Gender_75[];
 extern const u8 gText_Stats_Gender_87_5[];
 extern const u8 gText_Stats_Gender_100[];
-extern const u8 gText_Stats_Catch[];
-extern const u8 gText_Stats_Exp[];
+extern const u8 gText_Stats_CatchRate[];
+extern const u8 gText_Stats_CatchRate_Number[];
+extern const u8 gText_Stats_CatchRate_Legend[];
+extern const u8 gText_Stats_CatchRate_VeryHard[];
+extern const u8 gText_Stats_CatchRate_Difficult[];
+extern const u8 gText_Stats_CatchRate_Medium[];
+extern const u8 gText_Stats_CatchRate_Relaxed[];
+extern const u8 gText_Stats_CatchRate_Easy[];
+extern const u8 gText_Stats_ExpYield[];
 extern const u8 gText_Stats_EggCycles[];
+extern const u8 gText_Stats_EggCycles_HatchSteps[];
+extern const u8 gText_Stats_EggCycles_VeryFast[];
+extern const u8 gText_Stats_EggCycles_Fast[];
+extern const u8 gText_Stats_EggCycles_Normal[];
+extern const u8 gText_Stats_EggCycles_Slow[];
 extern const u8 gText_Stats_Growthrate[];
 extern const u8 gText_Stats_Friendship[];
+extern const u8 gText_Stats_Friendship_BigAnger[];
+extern const u8 gText_Stats_Friendship_Neutral[];
+extern const u8 gText_Stats_Friendship_Happy[];
+extern const u8 gText_Stats_Friendship_BigSmile[];
 extern const u8 gText_Stats_MEDIUM_FAST[];
 extern const u8 gText_Stats_ERRATIC[];
 extern const u8 gText_Stats_FLUCTUATING[];
@@ -581,8 +593,8 @@ extern const u8 gText_Stats_SLOW[];
 extern const u8 gText_Stats_ContestHeart[];
 extern const u8 gText_PlusSymbol[];
 extern const u8 gText_Stats_Minus[];
-extern const u8 gText_Stats_eggGroup_g1[];
-extern const u8 gText_Stats_eggGroup_g2[];
+extern const u8 gText_Stats_eggGroup[];
+extern const u8 gText_Stats_eggGroup_Groups[];
 extern const u8 gText_Stats_eggGroup_MONSTER[];
 extern const u8 gText_Stats_eggGroup_WATER_1[];
 extern const u8 gText_Stats_eggGroup_BUG[];
@@ -600,6 +612,54 @@ extern const u8 gText_Stats_eggGroup_DRAGON[];
 extern const u8 gText_Stats_eggGroup_UNDISCOVERED[];
 extern const u8 gText_Dex_SEEN[];
 extern const u8 gText_Dex_OWN[];
+
+extern const u8 gText_EVO_Buttons[];
+extern const u8 gText_EVO_Buttons_Decapped[];
+extern const u8 gText_EVO_Buttons_PE[];
+extern const u8 gText_EVO_Buttons_Decapped_PE[];
+extern const u8 gText_EVO_Name[];
+extern const u8 gText_EVO_PreEvo[];
+extern const u8 gText_EVO_PreEvo_PE_Mega[];
+extern const u8 gText_EVO_FRIENDSHIP[];
+extern const u8 gText_EVO_FRIENDSHIP_DAY[];
+extern const u8 gText_EVO_FRIENDSHIP_NIGHT[];
+extern const u8 gText_EVO_LEVEL[];
+extern const u8 gText_EVO_TRADE[];
+extern const u8 gText_EVO_TRADE_ITEM[];
+extern const u8 gText_EVO_ITEM[];
+extern const u8 gText_EVO_LEVEL_ATK_GT_DEF[];
+extern const u8 gText_EVO_LEVEL_ATK_EQ_DEF[];
+extern const u8 gText_EVO_LEVEL_ATK_LT_DEF[];
+extern const u8 gText_EVO_LEVEL_SILCOON[];
+extern const u8 gText_EVO_LEVEL_CASCOON[];
+extern const u8 gText_EVO_LEVEL_NINJASK[];
+extern const u8 gText_EVO_LEVEL_SHEDINJA[];
+extern const u8 gText_EVO_BEAUTY[];
+extern const u8 gText_EVO_LEVEL_FEMALE[];
+extern const u8 gText_EVO_LEVEL_MALE[];
+extern const u8 gText_EVO_LEVEL_NIGHT[];
+extern const u8 gText_EVO_LEVEL_DAY[];
+extern const u8 gText_EVO_LEVEL_DUSK[];
+extern const u8 gText_EVO_ITEM_HOLD_DAY[];
+extern const u8 gText_EVO_ITEM_HOLD_NIGHT[];
+extern const u8 gText_EVO_MOVE[];
+extern const u8 gText_EVO_MOVE_TYPE[];
+extern const u8 gText_EVO_MAPSEC[];
+extern const u8 gText_EVO_ITEM_MALE[];
+extern const u8 gText_EVO_ITEM_FEMALE[];
+extern const u8 gText_EVO_LEVEL_RAIN[];
+extern const u8 gText_EVO_SPECIFIC_MON_IN_PARTY[];
+extern const u8 gText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[];
+extern const u8 gText_EVO_TRADE_SPECIFIC_MON[];
+extern const u8 gText_EVO_SPECIFIC_MAP[];
+extern const u8 gText_EVO_UNKNOWN[];
+extern const u8 gText_EVO_NONE[];
+
+extern const u8 gText_FORMS_Buttons_PE[];
+extern const u8 gText_FORMS_Buttons_Decapped_PE[];
+extern const u8 gText_FORMS_Buttons_Submenu_PE[];
+extern const u8 gText_FORMS_Buttons_Submenu_Decapped_PE[];
+extern const u8 gText_FORMS_NONE[];
 
 // birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];
@@ -2852,6 +2912,9 @@ extern const u8 gJPText_WriteErrorUnableToSaveData[];
 // Berry Powder Menu
 extern const u8 gText_Powder[];
 
+// Soot Sack Menu
+extern const u8 gText_AshQty[];
+
 // Union Room Chat
 extern const u8 gText_F700JoinedChat[];
 extern const u8 gText_F700LeftChat[];
@@ -3129,5 +3192,11 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
+
+// Move Items in Party Menu
+extern const u8 gMenuText_Move[];
+extern const u8 gText_MoveItemWhere[];
+extern const u8 gText_XsYAnd[];
+extern const u8 gText_XsYWereSwapped[];
 
 #endif // GUARD_STRINGS_H

@@ -218,7 +218,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSecretPower            @ EFFECT_SECRET_POWER
 	.4byte BattleScript_EffectDoubleEdge             @ EFFECT_DOUBLE_EDGE
 	.4byte BattleScript_EffectTeeterDance            @ EFFECT_TEETER_DANCE
-	.4byte BattleScript_EffectBurnHit                @ EFFECT_BLAZE_KICK
+	.4byte BattleScript_EffectBlazeKick              @ EFFECT_BLAZE_KICK
 	.4byte BattleScript_EffectMudSport               @ EFFECT_MUD_SPORT
 	.4byte BattleScript_EffectPoisonFang             @ EFFECT_POISON_FANG
 	.4byte BattleScript_EffectWeatherBall            @ EFFECT_WEATHER_BALL
@@ -940,6 +940,10 @@ BattleScript_EffectLeafBlade2::
 	ppreduce
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectBlazeKick::
+	setmoveeffect MOVE_EFFECT_BURN_FLINCH
+	goto BattleScript_EffectHit
+
 BattleScript_EffectRecoil::
 	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
@@ -1108,8 +1112,15 @@ BattleScript_EffectAccuracyDownHit::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectSkyAttack::
+	attackcanceler
 	ppreduce
-	goto BattleScript_TwoTurnMovesSecondTurn
+	setmoveeffect MOVE_EFFECT_CHARGING
+	setbyte sB_ANIM_TURN, 1
+	clearstatusfromeffect BS_ATTACKER
+	orword gHitMarker, HITMARKER_NO_PPDEDUCT
+	setmoveeffect MOVE_EFFECT_FLINCH
+	goto BattleScript_HitFromAccCheck
+	@goto BattleScript_TwoTurnMovesSecondTurn
 	@jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	@jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
 	@setbyte sTWOTURN_STRINGID, B_MSG_TURN1_SKY_ATTACK
@@ -4625,3 +4636,13 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	endlinkbattle
 	waitmessage B_WAIT_TIME_LONG
 	end2
+
+BattleScript_AttackBoostedByAbility::
+	printstring STRINGID_ATTACKBOOSTEDBYABILITY
+	waitmessage B_WAIT_TIME_SHORT
+	return
+
+BattleScript_MagmaArmorActivated::
+	printstring STRINGID_MAGMAARMORACTIVATED
+	waitmessage B_WAIT_TIME_SHORT
+	return

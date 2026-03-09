@@ -1283,6 +1283,25 @@ const u16 gTilesetPalettes_EliteFour[][16] =
 	INCBIN_U16("data/tilesets/secondary/elite_four/palettes/15.gbapal"),
 };
 
+const u16 gTilesetPalettes_EliteFour_Steven[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/elite_four_steven/palettes/15.gbapal"),
+};
 const u32 gTilesetTiles_BattleFrontier[] = INCBIN_U32("data/tilesets/secondary/battle_frontier/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_BattleFrontier[][16] =

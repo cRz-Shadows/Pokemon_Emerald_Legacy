@@ -2,11 +2,26 @@ FallarborTown_Mart_MapScripts::
 	.byte 0
 
 FallarborTown_Mart_EventScript_Clerk::
+	call_if_unset FLAG_SYS_GAME_CLEAR, FallarborTown_Mart_EventScript_Clerk_MainGame
+	call_if_set FLAG_SYS_GAME_CLEAR, FallarborTown_Mart_EventScript_Clerk_PostGame
+	end
+
+FallarborTown_Mart_EventScript_Clerk_MainGame::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
 	pokemart FallarborTown_Mart_Pokemart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+FallarborTown_Mart_EventScript_Clerk_PostGame::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart FallarborTown_Mart_Pokemart_PostGame
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -20,6 +35,20 @@ FallarborTown_Mart_Pokemart:
 	.2byte ITEM_ESCAPE_ROPE
 	.2byte ITEM_SUPER_REPEL
 	.2byte ITEM_REVIVE
+	.2byte ITEM_NONE
+	release
+	end
+
+	.align 2
+FallarborTown_Mart_Pokemart_PostGame:
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ETHER
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_SUPER_REPEL
+	.2byte ITEM_REVIVE
+	.2byte ITEM_DRAGON_FANG
 	.2byte ITEM_NONE
 	release
 	end

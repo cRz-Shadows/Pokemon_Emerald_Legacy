@@ -298,9 +298,14 @@ LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC::
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
+	goto_if_set FLAG_SYS_GAME_CLEAR, LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC_GameCleared
 	special BedroomPC
 	waitstate
 	releaseall
+	end
+
+LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC_GameCleared::
+	goto EventScript_PCMainMenu_PlayerRoom
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::

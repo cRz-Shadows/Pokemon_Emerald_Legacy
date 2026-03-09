@@ -11,11 +11,16 @@ EverGrandeCity_ChampionsRoom_MapScripts::
 
 EverGrandeCity_ChampionsRoom_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
+	call_if_unset FLAG_IS_CHAMPION, EverGrandeCity_ChampionsRoom_EventScript_SetStevenLayout
 	end
 
 EverGrandeCity_ChampionsRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth
 	.2byte 0
+
+EverGrandeCity_ChampionsRoom_EventScript_SetStevenLayout::	
+	setmaplayoutindex LAYOUT_EVER_GRANDE_CITY_CHAMPIONS_ROOM_STEVEN
+	return	
 
 EverGrandeCity_ChampionsRoom_EventScript_PlayerTurnNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
