@@ -86,6 +86,12 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
+	@ Force Birch visible in the lab even if the Mossdeep Jirachi sidequest
+	@ has not been done yet — UpdateLocation also handles this via the
+	@ Johto starter state bypass, but addobject here is a safety net so
+	@ the subsequent setobjectxy/turnobject below operate on a real object.
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	addobject LOCALID_BIRCH
 	goto_if_set FLAG_GOT_CYNDAQUIL, LittlerootTown_ProfessorBirchsLab_EventScript_SkipCyndaquil
 	addobject LOCALID_BALL_CYNDAQUIL
 LittlerootTown_ProfessorBirchsLab_EventScript_SkipCyndaquil::
