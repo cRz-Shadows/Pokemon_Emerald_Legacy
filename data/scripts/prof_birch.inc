@@ -1,4 +1,10 @@
 ProfBirch_EventScript_UpdateLocation::
+	@ If the Johto-starter quest needs Birch in the lab (state >= 4 = "all
+	@ Hoenn mons caught, choose a Johto starter"), force him to the lab
+	@ regardless of whether the Mossdeep Jirachi sidequest has been done.
+	@ Mossdeep Birch is a separate object event with its own hide flag, so
+	@ this does not affect the Jirachi quest.
+	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, ProfBirch_EventScript_MoveToLab
 	goto_if_unset FLAG_HIDE_MOSSDEEP_CITY_BIRCH, Common_EventScript_NopReturn
 	goto_if_eq VAR_PETALBURG_GYM_STATE, 0, Common_EventScript_NopReturn
 	goto_if_set FLAG_SYS_GAME_CLEAR, ProfBirch_EventScript_MoveToLab
