@@ -12,6 +12,7 @@ static const u8 sScrollDistances[] = {
     [OPTIONS_TEXT_SPEED_SLOW] = 1,
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
+    [OPTIONS_TEXT_SPEED_INST] = 4,
 };
 static const u16 sFont_Braille[] = INCBIN_U16("graphics/fonts/braille.fwjpnfont");
 
