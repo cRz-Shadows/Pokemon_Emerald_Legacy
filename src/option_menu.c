@@ -422,7 +422,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 static void TextSpeed_DrawChoices(u8 selection)
 {
     u8 styles[4];
-    s32 widthSlow, widthMid, widthFast, widthInst, xMid;
+    s32 widthSlow, widthMid, widthFast, widthInst;
 
     styles[0] = 0;
     styles[1] = 0;
@@ -440,7 +440,7 @@ static void TextSpeed_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_TextSpeedMid, 123, YPOS_TEXTSPEED, styles[1]);
     DrawOptionMenuChoice(gText_TextSpeedFast, 147, YPOS_TEXTSPEED, styles[2]);
 
-    DrawOptionMenuChoice(gText_TextSpeedInst, GetStringRightAlignXOffset(1, gText_TextSpeedFast, 200), YPOS_TEXTSPEED, styles[3]);
+    DrawOptionMenuChoice(gText_TextSpeedInst, GetStringRightAlignXOffset(FONT_NORMAL, gText_TextSpeedFast, 200), YPOS_TEXTSPEED, styles[3]);
 }
 
 static u8 BattleScene_ProcessInput(u8 selection)
