@@ -47,7 +47,7 @@ These videos also provide an overview of the hack and the ideology behind it:
 
 ### Creators:
 - TheSmithPlays - Project Manager and Developer
-- cRz Shadows - Lead Devoloper
+- cRz Shadows - Lead Developer
 - Weebra - Video Editor
 - Aerogod - Developer
 - Disq - Developer
